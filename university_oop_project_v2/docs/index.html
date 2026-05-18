@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><title>University OOP Project Documentation</title>
+<style>body{font-family:Arial,sans-serif;line-height:1.5;margin:40px;max-width:1100px}code{background:#eee;padding:2px 5px}.card{border:1px solid #ddd;border-radius:10px;padding:16px;margin:14px 0}h1,h2{color:#1f2937}table{border-collapse:collapse;width:100%}td,th{border:1px solid #ddd;padding:8px}.ok{color:#047857;font-weight:bold}</style></head>
+<body>
+<h1>Research-Oriented University System — Documentation</h1>
+<p>This documentation describes the main 5-10+ classes, interfaces, patterns and console demo.</p>
+<h2>Architecture</h2>
+<ul>
+<li><code>project.models</code> contains the model classes that correspond to the UML class/object diagram.</li>
+<li><code>project.storage</code> contains <code>DataRepository</code>, <code>AppData</code>, and <code>FileStorage</code> for serialization.</li>
+<li><code>project.ui</code> contains console menus.</li>
+<li><code>project.patterns</code> contains Factory, Strategy and Decorator implementations.</li>
+</ul>
+<h2>Core Classes</h2>
+<div class="card"><h3>CreateUser</h3><p>Abstract superclass for all users. Stores id, username, password, name, email, role. Implements authentication, Comparable, equals, hashCode, and toString.</p></div>
+<div class="card"><h3>CreateEmployee</h3><p>Base class for employees. Adds department, inbox, complaints, sendMessage(), and sendComplaint().</p></div>
+<div class="card"><h3>CreateTeacher</h3><p>Teacher role. Can view courses, view students, put marks, receive ratings, and act as Researcher. Professors automatically become researchers with h-index at least 3.</p></div>
+<div class="card"><h3>RegisterStudent</h3><p>Student role. Can register for courses, view marks, get transcript, rate teachers, and receive course notifications. Checks 21-credit limit and fail-count rule. Fourth-year supervisor requires h-index >= 3.</p></div>
+<div class="card"><h3>AppointManager</h3><p>Manager role. Approves registration, assigns teachers to courses, creates statistical course reports, and sorts students by GPA.</p></div>
+<div class="card"><h3>AdministerSystem</h3><p>Admin role. Adds, updates, removes users, and views access logs.</p></div>
+<div class="card"><h3>EstablishCourse</h3><p>Course model. Supports multiple instructors, enrolled students, lessons, and Observer pattern methods attach(), detach(), notifyObservers().</p></div>
+<div class="card"><h3>GenerateGrade</h3><p>Mark model. Stores attestation 1, attestation 2, and final exam. Calculates total, letter grade and GPA point.</p></div>
+<div class="card"><h3>PublishResearchPaper</h3><p>Research paper object. Stores title, authors, journal, DOI, publication date, citations, pages and keywords. Implements Comparable.</p></div>
+<div class="card"><h3>InitiateProject</h3><p>Research project. Stores topic, participants, papers and start date. Throws NotResearcherException when a non-researcher tries to join.</p></div>
+<h2>Design Patterns</h2>
+<table><tr><th>Pattern</th><th>Implementation</th><th>Why used</th></tr>
+<tr><td>Singleton</td><td>DataRepository</td><td>One shared repository/database in the app.</td></tr>
+<tr><td>Factory</td><td>CreateUserFactory.createUser(...)</td><td>Centralized object creation for users.</td></tr>
+<tr><td>Strategy</td><td>PaperSortStrategy</td><td>Different sorting strategies for research papers.</td></tr>
+<tr><td>Observer</td><td>CourseObserver + EstablishCourse</td><td>Students receive course notifications.</td></tr><tr><td>Decorator</td><td>ResearcherDecorator, StudentResearcherDecorator, TeacherResearcherDecorator, EmployeeResearcherDecorator</td><td>Adds researcher role representation to students, teachers and employees without changing their base class.</td></tr>
+</table>
+<h2>Run</h2><pre>javac -d out $(find src -name "*.java")
+java -cp out project.Main</pre>
+<p class="ok">The project compiles and runs in console.</p>
+</body></html>

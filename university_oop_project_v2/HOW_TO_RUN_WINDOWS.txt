@@ -1,0 +1,14 @@
+Windows PowerShell commands:
+
+cd path\to\university_oop_project_v2
+Get-ChildItem -Recurse -Filter *.java src | ForEach-Object { $_.FullName } > sources.txt
+javac -d out @sources.txt
+java -cp out project.Main
+
+Demo accounts:
+admin / admin
+student / 123
+prof / 123
+manager / 123
+researcher / 123
+bob / 123
